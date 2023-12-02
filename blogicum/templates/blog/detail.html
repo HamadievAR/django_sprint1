@@ -6,8 +6,5 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container py-5">
-    {% include 'blog/post_common.html' %}
-    <p>{{ post.text }}</p>
-  </div>
+  {% include 'includes/post_common.html' with is_full_text=True %}
 {% endblock %}

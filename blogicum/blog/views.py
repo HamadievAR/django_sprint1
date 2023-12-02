@@ -1,6 +1,7 @@
 """Модуль, содержащий представления для блога."""
 
 from django.shortcuts import render
+from django.http import Http404
 
 posts = [
     {
@@ -45,6 +46,9 @@ posts = [
     },
 ]
 
+# Создаем словарь, где ключами являются значения поля 'id' из постов
+posts_dict = {post['id']: post for post in posts}
+
 
 def index(request):
     """Отображает главную страницу блога со списком постов."""
@@ -52,9 +56,14 @@ def index(request):
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     """Отображает детали конкретного поста по его идентификатору."""
-    context = {'post': posts[id]}
+    try:
+        post = posts_dict[post_id]
+    except IndexError:
+        raise Http404("Пост не найден")
+
+    context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
 
