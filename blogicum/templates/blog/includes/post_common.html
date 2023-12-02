@@ -5,9 +5,9 @@
       <li>Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a></li>
   </ul>
 {% if is_full_text %}
-  <p>{{ post.text|linebreaks }}</p>
+  <p>{{ post.text|linebreaksbr }}</p>
 {% else %}
-<p>{{ post.text|truncatewords:10|linebreaks }}</p>
+<p>{{ post.text|truncatewords:10|linebreaksbr }}</p>
   <br>
   <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
 {% endif %}

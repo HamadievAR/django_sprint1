@@ -47,7 +47,7 @@ posts = [
 ]
 
 # Создаем словарь, где ключами являются значения поля 'id' из постов
-posts_dict = {post['id']: post for post in posts}
+map = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -59,8 +59,8 @@ def index(request):
 def post_detail(request, post_id):
     """Отображает детали конкретного поста по его идентификатору."""
     try:
-        post = posts_dict[post_id]
-    except IndexError:
+        post = map[post_id]
+    except KeyError:
         raise Http404("Пост не найден")
 
     context = {'post': post}
